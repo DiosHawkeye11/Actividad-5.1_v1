@@ -8,6 +8,7 @@ function Customer(props) {
   let [pickupAddress, setPickupAddress] = useState("Tecnologico de Monterrey, campus Puebla, Mexico");
   let [dropOffAddress, setDropOffAddress] = useState("Triangulo Las Animas, Puebla, Mexico");
   let [msg, setMsg] = useState("");
+  let [bookingId, setBookingId] = useState("");
 
   useEffect(() => {
     let channel = socket.channel("customer:" + props.username, {token: "123"});
@@ -24,8 +25,9 @@ function Customer(props) {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({pickup_address: pickupAddress, dropoff_address: dropOffAddress, username: props.username})
-    }).then(resp => resp.json()).then(data => setMsg(data.msg));
+    }).then(resp => resp.json()).then(data => {setMsg(data.msg); setBookingId(data.booking_id);});
   };
+
 
   return (
     <div style={{textAlign: "center", borderStyle: "solid"}}>
