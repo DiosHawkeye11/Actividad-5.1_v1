@@ -44,7 +44,7 @@ defmodule TaxiBeWeb.TaxiAllocationJob do
            bookingId: booking_id
           })
 
-      Process.send_after(self(), :timeout1, 5000)
+      Process.send_after(self(), :timeout1, 60000)
       {:noreply, %{request: request, candidates: tl(taxis), contacted_taxi: taxi, estado: NoAceptado}}
     else
       %{"username" => username} = request
